@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 const TruckList = (props) => {
-  console.log('props', props);
   const truckList = props.list.map((truck) => {
     return (
       <div className="truckDescription" key={truck.objectid}>
