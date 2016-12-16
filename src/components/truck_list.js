@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const TruckList = (props) => {
   const truckList = props.list.map((truck) => {
     return (
-      <div className="truckDescription" key={truck.objectid}>
+      <div key={truck.objectid} className="list-box">
         applicant: {truck.applicant}<br/>
         location: {truck.locationdescription}
       </div>
@@ -11,9 +11,9 @@ const TruckList = (props) => {
   });
   
   return(
-    <ul className="col-md-4 list-group">
+    <div className="truckDescription">
       {truckList}
-    </ul>
+    </div>
   );
 }
 

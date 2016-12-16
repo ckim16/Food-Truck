@@ -7,8 +7,8 @@ export default class GoogleMap extends Component {
   render() {
     return (
       <Map google={window.google}
-        style={{width: '100%', height: '100%', position: 'relative'}}
-        zoom={10}>
+        style={{width: '50%', height: '80%', position: 'relative'}}
+        zoom={13}>
       </Map>
     );
   }

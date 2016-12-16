@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.truckDescription {
+  width: 40%;
+  float: right;
+  border: 1px solid #ddd;;
+}
+
+.list-box {
+  width: 100%;
+  border: 2px solid black;
+  margin-bottom: -1px;
+}
