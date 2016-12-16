@@ -1,30 +1,15 @@
 import React, {PropTypes, Component} from 'react';
-import shouldPureComponentUpdate from 'react-pure-render/function';
-
-import GoogleMap from 'google-map-react';
-import MyGreatPlace from './my_great_place.jsx';
+import Map, { Marker } from 'google-maps-react';
+// center: {lat: 37.7749, lng: 122.4194}
 
 export default class GoogleMap extends Component {
-  static defaultProps = {
-    center: {lat: 37.7749, lng: 122.4194},
-    zoom: 9,
-    greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
-  };
-
-  shouldComponentUpdate = shouldPureComponentUpdate;
-
-  constructor(props) {
-    super(props);
-  }
-
+  
   render() {
     return (
-       <GoogleMap
-        defaultCenter={this.props.center}
-        defaultZoom={this.props.zoom}>
-        <MyGreatPlace lat={59.955413} lng={30.337844} text={'A'} /* Kreyser Avrora */ />
-        <MyGreatPlace {...this.props.greatPlaceCoords} text={'B'} /* road circle */ />
-      </GoogleMap>
+      <Map google={window.google}
+        style={{width: '100%', height: '100%', position: 'relative'}}
+        zoom={10}>
+      </Map>
     );
   }
 }

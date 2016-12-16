@@ -1,7 +1,7 @@
 {
-  "name": "Find nearby Food Truck in SF with React",
+  "name": "React",
   "version": "1.0.0",
-  "description": "",
+  "description": "Find nearby Food Truck in SF with React",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,6 +13,7 @@
     "axios": "^0.15.2",
     "babel-preset-stage-1": "^6.16.0",
     "google-map-react": "^0.22.0",
+    "google-maps-react": "^1.0.19",
     "lodash": "^4.17.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"

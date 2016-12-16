@@ -5,7 +5,6 @@ const TruckList = (props) => {
     return (
       <div className="truckDescription" key={truck.objectid}>
         applicant: {truck.applicant}<br/>
-        fooditems: {truck.fooditems}<br/>
         location: {truck.locationdescription}
       </div>
     );
