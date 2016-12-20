@@ -27,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <TruckMap />
+        <TruckMap list={this.state.truckArr} />
         <TruckList list={this.state.truckArr}/>
       </div>
     );
