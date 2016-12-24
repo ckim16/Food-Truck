@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-import Map, { Marker } from 'google-maps-react';
-import ReactTooltip from 'react-tooltip';
+import Map, { Marker, InfoWindow } from 'google-maps-react';
 
 export default class GoogleMap extends Component {
   constructor(props) {
     super(props);
-    this.renderTrucks = this.renderTrucks.bind(this);
-  }
 
-  onMouseoverMarker(props, marker, e) {
-    console.log('this', this.name);
+    this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {}
+    };
+
+    this.renderTrucks = this.renderTrucks.bind(this);
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+  }
+  
+  onMarkerClick(props, marker, e) {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  } 
+
+  onMapClicked(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
   }
 
   renderTrucks() { 
-    if (this.props.list.length === 0) {
-      return;
-    }   
-
     return this.props.list.map((truckInfo) => {
       return (<Marker
         key={truckInfo.objectid}
         name={truckInfo.applicant}
-        onMouseover={this.onMouseoverMarker} 
+        onClick={this.onMarkerClick}
         position={{lat:truckInfo.latitude, lng:truckInfo.longitude}} />
       );
     });
@@ -29,13 +46,18 @@ export default class GoogleMap extends Component {
 
   
   render() {
-
     return (
       <Map google={window.google}
-        className={'map'}
+        onClick={this.onMapClicked}
         style={{width: '50%', height: '80%', position: 'relative'}}
         zoom={13}>
         {this.renderTrucks()}
+
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+          <p>{this.state.selectedPlace.name}</p>
+        </InfoWindow>        
       </Map>
     );
   }
