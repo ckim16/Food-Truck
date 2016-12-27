@@ -38,6 +38,9 @@ export default class GoogleMap extends Component {
       return (<Marker
         key={truckInfo.objectid}
         name={truckInfo.applicant}
+        address={truckInfo.address}
+        hours={truckInfo.dayshours}
+        items={truckInfo.fooditems}
         onClick={this.onMarkerClick}
         position={{lat:truckInfo.latitude, lng:truckInfo.longitude}} />
       );
@@ -48,15 +51,20 @@ export default class GoogleMap extends Component {
   render() {
     return (
       <Map google={window.google}
+        className={'map'}
         onClick={this.onMapClicked}
-        style={{width: '50%', height: '80%', position: 'relative'}}
         zoom={13}>
         {this.renderTrucks()}
 
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
-          <p>{this.state.selectedPlace.name}</p>
+          <p>
+            {this.state.selectedPlace.name}<br /> 
+            {this.state.selectedPlace.address}<br /> 
+            {this.state.selectedPlace.hours}<br />
+            {this.state.selectedPlace.items}
+          </p>
         </InfoWindow>        
       </Map>
     );

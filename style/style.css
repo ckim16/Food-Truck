@@ -1,14 +1,21 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body, html {
+  margin: 0px;
+  padding: 0px;
+  width: 0px;
 }
 
-.app {
+.container {
+  position: relative;
+  width: 50%;
+  height: 50%;
+}
+
+/*.app {
   overflow-y: auto;
-}
+  
+}*/
 
-.truckDescription {
+/*.truckDescription {
   max-height: 500px;
   width: 40%;
   float: right;
@@ -21,4 +28,9 @@
   border: 2px solid black;
   margin-bottom: -1px;
   font-size: 12px;
+}*/
+
+.map {
+  height: 90%;
+  width: 90%;
 }
