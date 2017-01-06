@@ -34,6 +34,7 @@ export default class GoogleMap extends Component {
   }
 
   renderTrucks() { 
+    // assign marker with id
     return this.props.list.map((truckInfo) => {
       return (<Marker
         key={truckInfo.objectid}
