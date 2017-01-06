@@ -7,9 +7,19 @@ export default class SearchBar extends Component {
     this.state = {food: ''};
   }
 
-  //use geocoder to get lat and lng when user inputs and street address in sf
-
   render() {
-    
+    return (
+      <div>
+        <input 
+          value={this.state.food}
+          onChange={event => this.onInputChange(event.target.value)}
+          />
+      </div>
+    );
+  }
+
+  onInputChange(food) {
+    this.setState({food});
+    this.props.onSearchTermChange(food);
   }
 }
