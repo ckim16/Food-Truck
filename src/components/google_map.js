@@ -33,19 +33,41 @@ export default class GoogleMap extends Component {
     }
   }
 
-  renderTrucks() { 
+  // renderFilterList() {
+  //   const img = 'https://maps.google.com/mapfiles/kml/shapes/truck.png';
+  //   if (this.props.filteredList.length !== 0) {
+  //     this.setState({icon: img});
+  //   } 
+  // }
+
+  renderTrucks() {
     // assign marker with id
-    return this.props.list.map((truckInfo) => {
-      return (<Marker
-        key={truckInfo.objectid}
-        name={truckInfo.applicant}
-        address={truckInfo.address}
-        hours={truckInfo.dayshours}
-        items={truckInfo.fooditems}
-        onClick={this.onMarkerClick}
-        position={{lat:truckInfo.latitude, lng:truckInfo.longitude}} />
-      );
-    });
+    if (this.props.filteredList.length !== 0) {
+      return this.props.filteredList.map((filteredTruck) => {
+        return (<Marker
+          key={filteredTruck.objectid}
+          name={filteredTruck.applicant}
+          address={filteredTruck.address}
+          hours={filteredTruck.dayshours}
+          items={filteredTruck.fooditems}
+          onClick={this.onMarkerClick}
+          icon={'https://maps.google.com/mapfiles/kml/shapes/truck.png'}
+          position={{lat:filteredTruck.latitude, lng:filteredTruck.longitude}} />
+        );
+      });
+    } else {
+      return this.props.list.map((truckInfo) => {
+        return (<Marker
+          key={truckInfo.objectid}
+          name={truckInfo.applicant}
+          address={truckInfo.address}
+          hours={truckInfo.dayshours}
+          items={truckInfo.fooditems}
+          onClick={this.onMarkerClick}
+          position={{lat:truckInfo.latitude, lng:truckInfo.longitude}} />
+        );
+      });
+    }
   }
 
   

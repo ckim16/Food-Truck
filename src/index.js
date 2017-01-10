@@ -40,7 +40,6 @@ class App extends Component {
         }
       });
       this.setState({filterList: filtered});
-      console.log('state', this.state);
     });
   }
 
@@ -49,7 +48,7 @@ class App extends Component {
     return (
       <div className="app">
         <SearchBar onSearchTermChange={foodSearch} />
-        <TruckMap list={this.state.truckArr} />
+        <TruckMap list={this.state.truckArr} filteredList={this.state.filterList}/>
       </div>
     );
   }
