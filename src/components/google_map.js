@@ -33,16 +33,9 @@ export default class GoogleMap extends Component {
     }
   }
 
-  // renderFilterList() {
-  //   const img = 'https://maps.google.com/mapfiles/kml/shapes/truck.png';
-  //   if (this.props.filteredList.length !== 0) {
-  //     this.setState({icon: img});
-  //   } 
-  // }
-
   renderTrucks() {
     // assign marker with id
-    if (this.props.filteredList.length !== 0) {
+    if (this.props.filteredList.length !== 0 || !this.props.filteredList) {
       return this.props.filteredList.map((filteredTruck) => {
         return (<Marker
           key={filteredTruck.objectid}
@@ -51,7 +44,7 @@ export default class GoogleMap extends Component {
           hours={filteredTruck.dayshours}
           items={filteredTruck.fooditems}
           onClick={this.onMarkerClick}
-          icon={'https://maps.google.com/mapfiles/kml/shapes/truck.png'}
+          icon={'https://maxcdn.icons8.com/windows8/PNG/26/Transport/truck-26.png'}
           position={{lat:filteredTruck.latitude, lng:filteredTruck.longitude}} />
         );
       });

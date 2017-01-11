@@ -6,14 +6,15 @@ body, html {
 
 .container {
   position: relative;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
 }
 
-/*.app {
-  overflow-y: auto;
-  
-}*/
+.app {
+  /*overflow-y: auto;*/
+  width: 500px;
+  position: absolute;
+}
 
 /*.truckDescription {
   max-height: 500px;
@@ -29,6 +30,14 @@ body, html {
   margin-bottom: -1px;
   font-size: 12px;
 }*/
+
+.search-bar {
+  width: 100%;
+}
+
+.search-input {
+  width: 250px;
+}
 
 .map {
   height: 90%;

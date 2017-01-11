@@ -9,8 +9,10 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <div>
+      <div className="search-bar">
         <input 
+          className="search-input"
+          placeholder="What do you want to eat now?"
           value={this.state.food}
           onChange={event => this.onInputChange(event.target.value)}
           />

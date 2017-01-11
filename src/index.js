@@ -24,23 +24,28 @@ class App extends Component {
       self.setState({ truckArr: truckArr });
     });
     this.foodSearch('hey');
+    // put hey just so it doesn't filter at the beginning..
     this.foodSearch = this.foodSearch.bind(this);
   }
 
   foodSearch(food) {
     const filtered = [];
-    axios.get(url)
-    .then(truckList => {
-      _.forEach(truckList.data, (truck) => {
-        if (truck.fooditems !== undefined) {
-          const item = truck.fooditems.toLowerCase();
-          if (item.includes(food) === true) {
-            filtered.push(truck);
+    if (food === '') {
+      this.setState({filterList: []});
+    } else {
+      axios.get(url)
+      .then(truckList => {
+        _.forEach(truckList.data, (truck) => {
+          if (truck.fooditems !== undefined) {
+            const item = truck.fooditems.toLowerCase();
+            if (item.includes(food) === true) {
+              filtered.push(truck);
+            }
           }
-        }
-      });
-      this.setState({filterList: filtered});
-    });
+        });
+        this.setState({filterList: filtered});
+      }); 
+    }
   }
 
   render() {
