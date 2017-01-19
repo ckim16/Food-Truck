@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const TruckList = (props) => {
-  const truckList = props.list.map((truck) => {
-    return (
-      <div key={truck.objectid} className="list-box">
-        applicant: {truck.applicant}<br/>
-        location: {truck.locationdescription}
+class TruckList extends Component {
+  renderList() {
+    if (this.props.filteredList.length === 0) {
+      return this.props.list.map((truck) => {
+        return (
+          <div key={truck.objectid} className="list-box">
+            Applicant: {truck.applicant}<br />
+            Location: {truck.locationdescription}
+          </div>
+        );
+      });
+    } else {
+      return this.props.filteredList.map((filteredTruck) => {
+        return (
+          <div key={filteredTruck.objectid} className="list-box">
+            Applicant: {filteredTruck.applicant}<br/>
+            Location: {filteredTruck.locationdescription}
+          </div>
+        );
+      });
+    }
+  }
+  
+  render() { 
+    return(
+      <div className="truckDescription">
+        {this.renderList()}
       </div>
     );
-  });
-  
-  return(
-    <div className="truckDescription">
-      {truckList}
-    </div>
-  );
+  }
 }
 
 export default TruckList;

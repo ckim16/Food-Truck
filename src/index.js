@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import _ from 'lodash';
 
-// import TruckList from './components/truck_list';
+import TruckList from './components/truck_list';
 import TruckMap from './components/google_map';
 import SearchBar from './components/search_bar';
 
@@ -54,6 +54,7 @@ class App extends Component {
       <div className="app">
         <SearchBar onSearchTermChange={foodSearch} />
         <TruckMap list={this.state.truckArr} filteredList={this.state.filterList}/>
+        <TruckList list={this.state.truckArr} filteredList={this.state.filterList} />
       </div>
     );
   }

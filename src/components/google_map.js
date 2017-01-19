@@ -68,6 +68,7 @@ export default class GoogleMap extends Component {
     return (
       <Map google={window.google}
         className={'map'}
+        style={{width: '60vw', height: '100vh'}}
         onClick={this.onMapClicked}
         zoom={13}>
         {this.renderTrucks()}
