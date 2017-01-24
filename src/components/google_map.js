@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Map, { Marker, InfoWindow } from 'google-maps-react';
 
 export default class GoogleMap extends Component {
@@ -14,17 +15,49 @@ export default class GoogleMap extends Component {
     this.renderTrucks = this.renderTrucks.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
+    this.handleHover = this.handleHover.bind(this);
+  }
+
+  componentWillMount() {
+    document.addEventListener('mouseover', this.handleHover, false);
+  }
+
+  // componentWillUnmount() {
+  //   document.removeEventListener('mouseover', this.handleHover);
+  // }
+
+  handleHover(e, marker) {
+    console.log('marker', marker);
+    const hoveredPlace = e.target.childNodes[4].data;
+    if (e.target.className === 'list-box') {
+      if (this.props.filteredList.length === 0) {
+        this.props.list.map((truck) => {
+          if (truck.applicant === hoveredPlace) {
+            
+          }
+        });
+      }
+    }
   }
   
   onMarkerClick(props, marker, e) {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
+    console.log('p', props, 'm', marker, 'e2', e);
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+    } else { 
+      this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
+      });
+    }
   } 
 
   onMapClicked(props) {
+    console.log('map click', props);
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,

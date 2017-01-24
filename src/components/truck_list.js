@@ -5,18 +5,20 @@ class TruckList extends Component {
     if (this.props.filteredList.length === 0) {
       return this.props.list.map((truck) => {
         return (
-          <div key={truck.objectid} className="list-box">
+          <div key={truck.objectid} onMouseOver={this.props.onMouseOver} className="list-box">
             Applicant: {truck.applicant}<br />
-            Location: {truck.locationdescription}
+            Address: {truck.address}<br />
+            Type: {truck.facilitytype}
           </div>
         );
       });
     } else {
       return this.props.filteredList.map((filteredTruck) => {
         return (
-          <div key={filteredTruck.objectid} className="list-box">
+          <div key={filteredTruck.objectid} onMouseOver={this.props.onMouseOver} className="list-box">
             Applicant: {filteredTruck.applicant}<br/>
-            Location: {filteredTruck.locationdescription}
+            Address: {filteredTruck.address}<br />
+            Type: {truck.facilitytype}
           </div>
         );
       });
