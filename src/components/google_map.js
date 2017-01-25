@@ -15,30 +15,29 @@ export default class GoogleMap extends Component {
     this.renderTrucks = this.renderTrucks.bind(this);
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
-    this.handleHover = this.handleHover.bind(this);
   }
 
-  componentWillMount() {
-    document.addEventListener('mouseover', this.handleHover, false);
-  }
+  // componentWillMount() {
+  //   document.addEventListener('mouseover', this.handleHover, false);
+  // }
 
   // componentWillUnmount() {
   //   document.removeEventListener('mouseover', this.handleHover);
   // }
 
-  handleHover(e, marker) {
-    console.log('marker', marker);
-    const hoveredPlace = e.target.childNodes[4].data;
-    if (e.target.className === 'list-box') {
-      if (this.props.filteredList.length === 0) {
-        this.props.list.map((truck) => {
-          if (truck.applicant === hoveredPlace) {
+  // handleHover(e, marker) {
+  //   console.log('marker', marker);
+  //   const hoveredPlace = e.target.childNodes[4].data;
+  //   if (e.target.className === 'list-box') {
+  //     if (this.props.filteredList.length === 0) {
+  //       this.props.list.map((truck) => {
+  //         if (truck.applicant === hoveredPlace) {
             
-          }
-        });
-      }
-    }
-  }
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
   
   onMarkerClick(props, marker, e) {
     console.log('p', props, 'm', marker, 'e2', e);
@@ -78,6 +77,7 @@ export default class GoogleMap extends Component {
           items={filteredTruck.fooditems}
           onClick={this.onMarkerClick}
           icon={'https://maxcdn.icons8.com/windows8/PNG/26/Transport/truck-26.png'}
+          animation={3}
           position={{lat:filteredTruck.latitude, lng:filteredTruck.longitude}} />
         );
       });
@@ -90,6 +90,7 @@ export default class GoogleMap extends Component {
           hours={truckInfo.dayshours}
           items={truckInfo.fooditems}
           onClick={this.onMarkerClick}
+          animation={3}
           position={{lat:truckInfo.latitude, lng:truckInfo.longitude}} />
         );
       });

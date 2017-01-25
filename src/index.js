@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     const self = this;
-    self.state = { truckArr: [], filterList: [] };
+    self.state = { truckArr: [], filterList: [], hoveredItem: null };
 
     axios.get(url)
     .then((truckList) => {
@@ -48,13 +48,17 @@ class App extends Component {
     }
   }
 
+  handleHover(truck) {
+    this.setState({hoveredItem: truck});
+  }
+
   render() {
     const foodSearch = _.debounce((term) => { this.foodSearch(term) }, 800);
     return (
       <div className="app">
         <SearchBar onSearchTermChange={foodSearch} />
-        <TruckMap list={this.state.truckArr} filteredList={this.state.filterList}/>
-        <TruckList list={this.state.truckArr} filteredList={this.state.filterList} />
+        <TruckMap list={this.state.truckArr} filteredList={this.state.filterList} hover={this.state.hoveredItem}/>
+        <TruckList list={this.state.truckArr} filteredList={this.state.filterList} hover={this.handleHover.bind(this)}/>
       </div>
     );
   }
