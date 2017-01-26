@@ -67,6 +67,7 @@ export default class GoogleMap extends Component {
 
   renderTrucks() {
     // assign marker with id
+    
     if (this.props.filteredList.length !== 0 || !this.props.filteredList) {
       return this.props.filteredList.map((filteredTruck) => {
         return (<Marker
@@ -77,7 +78,7 @@ export default class GoogleMap extends Component {
           items={filteredTruck.fooditems}
           onClick={this.onMarkerClick}
           icon={'https://maxcdn.icons8.com/windows8/PNG/26/Transport/truck-26.png'}
-          animation={3}
+          animation={'drop'}
           position={{lat:filteredTruck.latitude, lng:filteredTruck.longitude}} />
         );
       });
@@ -90,7 +91,7 @@ export default class GoogleMap extends Component {
           hours={truckInfo.dayshours}
           items={truckInfo.fooditems}
           onClick={this.onMarkerClick}
-          animation={3}
+          animation={google.maps.Animation.BOUNCE}
           position={{lat:truckInfo.latitude, lng:truckInfo.longitude}} />
         );
       });
