@@ -1,67 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import _ from 'lodash';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
 
-import TruckList from './components/truck_list';
-import TruckMap from './components/google_map';
-import SearchBar from './components/search_bar';
+import App from './components/app';
+import reducers from './reducers';
 
-const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
-const truckArr = [];
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    const self = this;
-    self.state = { truckArr: [], filterList: [], hoveredItem: null };
-
-    axios.get(url)
-    .then((truckList) => {
-      _.forEach(truckList.data, (truck) => {
-        truckArr.push(truck);
-      });
-      self.setState({ truckArr: truckArr });
-    });
-    this.foodSearch('hey');
-    // put hey just so it doesn't filter at the beginning..
-    this.foodSearch = this.foodSearch.bind(this);
-  }
-
-  foodSearch(food) {
-    const filtered = [];
-    if (food === '') {
-      this.setState({filterList: []});
-    } else {
-      axios.get(url)
-      .then(truckList => {
-        _.forEach(truckList.data, (truck) => {
-          if (truck.fooditems !== undefined) {
-            const item = truck.fooditems.toLowerCase();
-            if (item.includes(food) === true) {
-              filtered.push(truck);
-            }
-          }
-        });
-        this.setState({filterList: filtered});
-      }); 
-    }
-  }
-
-  handleHover(truck) {
-    this.setState({hoveredItem: truck});
-  }
-
-  render() {
-    const foodSearch = _.debounce((term) => { this.foodSearch(term) }, 800);
-    return (
-      <div className="app">
-        <SearchBar onSearchTermChange={foodSearch} />
-        <TruckMap list={this.state.truckArr} filteredList={this.state.filterList} hover={this.state.hoveredItem}/>
-        <TruckList list={this.state.truckArr} filteredList={this.state.filterList} hover={this.handleHover.bind(this)}/>
-      </div>
-    );
-  }
-};
-
-ReactDOM.render(<App/>, document.querySelector('.container'));
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>
+  , document.querySelector('.container'));

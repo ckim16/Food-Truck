@@ -3,6 +3,18 @@ body, html {
   padding: 0px;
 }
 
+input {
+  width: 290px !important;
+  height: 37px;
+  size: 23px;
+  font-size: 18px;
+}
+
+.input-group {
+  width: 350px !important;
+  margin: 20px 0px;
+}
+
 .container {
   position: relative;
   width: 1200px;

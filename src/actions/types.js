@@ -1,0 +1,2 @@
+export const FETCH_TRUCKS = 'FETCH_TRUCKS';
+export const FILTER_TRUCKS = 'FILTER_TRUCKS';
