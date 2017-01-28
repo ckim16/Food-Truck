@@ -14,6 +14,21 @@ export function fetchTrucks() {
 
 export function filterTrucks(food) {
   const filteredTrucks = [];
+  // const request = axios.get(url)
+  //                 .then((resp) => {
+  //                   resp.data.map((truck) => {
+  //                     if (truck.fooditems !== undefined) {
+  //                       const item = truck.fooditems.toLowerCase();
+  //                       if (item.includes(food)) {
+  //                         filteredTrucks.push(truck);
+  //                       }
+  //                     }
+  //                   });
+  //                   return {
+  //                     type: FILTER_TRUCKS,
+  //                     payload: filteredTrucks
+  //                   }
+  //                 });
   return function(dispatch) {
     axios.get(url)
     .then(function(trucks) {
@@ -25,6 +40,7 @@ export function filterTrucks(food) {
             }
           }
       });
+      console.log('fil', filteredTrucks);
       dispatch({
         type: FILTER_TRUCKS,
         payload: filteredTrucks

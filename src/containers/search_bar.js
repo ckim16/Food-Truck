@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { filterTrucks } from '../actions/index';
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
 
@@ -39,3 +39,10 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({filterTrucks}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar);
