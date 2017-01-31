@@ -26,6 +26,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <SearchBar /> 
+        <TruckMap />
         <TruckList allTrucks={this.state.trucks} />
       </div>
     );
