@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 export default class Marker extends Component {
   componentDidUpdate(prevProps) {
+    console.log('MarkerDidUpdate');
     if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
         // The relevant props have changed
@@ -11,6 +12,7 @@ export default class Marker extends Component {
 
   //may need componentDidMount
   componentDidMount() {
+    console.log('MarkerDidMount');
     this.renderMarker();
   }
 
@@ -25,7 +27,7 @@ export default class Marker extends Component {
     const pref = {
         map: map,
         position: position,
-        animation: this.props.google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP
     };
     this.marker = new google.maps.Marker(pref);
   }

@@ -3,12 +3,22 @@ import { connect } from 'react-redux';
 import GoogleMap from '../components/google_map';
 import Marker from '../components/marker';
 
-export default class TruckMap extends Component {
+class TruckMap extends Component {
   renderMarkers() {
     console.log('up')
-    console.log('data', this.props.allTrucks);
+    console.log('data', this.props);
+    if (!this.props) {
+      return;
+    }
     if (!this.props.filteredTrucks) {
       return this.props.allTrucks.map((truck) => {
+        const pos = {lat: +truck.latitude, lng: +truck.longitude};
+        return (
+          <Marker position={pos} key={truck.objectid} />
+        );
+      });
+    } else {
+      return this.props.filteredTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
         return (
           <Marker position={pos} key={truck.objectid} />
@@ -31,10 +41,11 @@ export default class TruckMap extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     filteredTrucks: state.trucks
-//   };
-// }
+function mapStateToProps(state) {
+  console.log('state', state);
+  return {
+    filteredTrucks: state.trucks
+  };
+}
 
-// export default connect(mapStateToProps)(TruckMap);
+export default connect(mapStateToProps)(TruckMap);
