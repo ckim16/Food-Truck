@@ -13,9 +13,9 @@ class TruckList extends Component {
       return this.props.allTrucks.map((truck) => {
         return (
           <div className="list-box" key={truck.objectid}>
-            Name: {truck.applicant}<br/>
-            Address: {truck.address}<br/>
-            Type: {truck.facilitytype}
+            <i className="fa fa-truck" aria-hidden="true"></i>: {truck.applicant}<br/>
+            <i className="fa fa-address-book" aria-hidden="true"></i>: {truck.address}<br/>
+            <i className="fa fa-info" aria-hidden="true"></i>: {truck.facilitytype}
           </div>
         );
       });

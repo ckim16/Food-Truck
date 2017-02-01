@@ -12,11 +12,12 @@ input {
 
 .input-group {
   width: 350px !important;
+  vertical-align: middle;
   /*margin: 20px 0px;*/
   position: fixed;
   top: 10px;
   left: 150px;
-  z-index: 50px;
+  z-index: 50;
 }
 
 .container {
@@ -34,17 +35,20 @@ input {
 
 .truckDescription {
   height: 100%;
-  width: 30%;
+  width: 40%;
   float: left;
   border: 1px solid #ddd;
   overflow-y: auto;
+  cursor: pointer;
 }
 
 .list-box {
+  padding-left: 5px;
   width: 100%;
   border: 2px solid black;
   margin-bottom: 1px;
   font-size: 12px;
+  font-family: 'Barrio';
 }
 
 .search-bar {
