@@ -7,10 +7,8 @@ class TruckMap extends Component {
   renderMarkers() {
     console.log('up')
     console.log('data', this.props);
-    if (!this.props) {
-      return;
-    }
-    if (!this.props.filteredTrucks) {
+    
+    if (this.props.filteredTrucks.length === 0) {
       return this.props.allTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
         return (

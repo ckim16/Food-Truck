@@ -20,14 +20,12 @@ export default class Marker extends Component {
     let {
       map, google, position, mapCenter
     } = this.props;
-    console.log('this', this.props);
     let pos = position || mapCenter;
     position = new google.maps.LatLng(pos.lat, pos.lng);
 
     const pref = {
         map: map,
-        position: position,
-        animation: google.maps.Animation.DROP
+        position: position
     };
     this.marker = new google.maps.Marker(pref);
   }
