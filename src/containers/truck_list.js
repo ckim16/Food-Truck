@@ -9,7 +9,6 @@ class TruckList extends Component {
   }
 
   renderTrucks() {
-    console.log('this', this.props);
     if (this.props.filteredTrucks.length === 0) {
       return this.props.allTrucks.map((truck) => {
         return (

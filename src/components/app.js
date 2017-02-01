@@ -26,7 +26,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <SearchBar /> 
-        <TruckMap />
+        <TruckMap allTrucks={this.state.trucks}/>
         <TruckList allTrucks={this.state.trucks} />
       </div>
     );

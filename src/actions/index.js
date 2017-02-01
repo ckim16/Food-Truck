@@ -25,7 +25,6 @@ export function filterTrucks(food) {
             }
           }
       });
-      console.log('fil', filteredTrucks);
       dispatch({
         type: FILTER_TRUCKS,
         payload: filteredTrucks
