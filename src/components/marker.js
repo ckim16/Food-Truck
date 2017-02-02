@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 export default class Marker extends Component {
   componentDidUpdate(prevProps) {
-    console.log('MarkerDidUpdate');
+    console.log('MarkerDidUpdate', this.props);
     if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
         // The relevant props have changed
+
       this.renderMarker();
     }
   }
@@ -14,6 +15,17 @@ export default class Marker extends Component {
   componentDidMount() {
     console.log('MarkerDidMount');
     this.renderMarker();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('will update', nextProps);
+  }
+
+  componentWillUnmount() {
+    console.log('UNMOUNT', this.props)
+    if (this.props) {
+      this.marker.setMap(null);
+    }
   }
 
   renderMarker() {
