@@ -8,15 +8,15 @@ class TruckMap extends Component {
     console.log('up')
     console.log('data', this.props);
     
-    if (this.props.filteredTrucks.length === 0) {
-      return this.props.allTrucks.map((truck) => {
+    if (this.props.filteredTrucks.length > 0) {
+      return this.props.filteredTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
         return (
           <Marker position={pos} key={truck.objectid} />
         );
       });
     } else {
-      return this.props.filteredTrucks.map((truck) => {
+      return this.props.allTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
         return (
           <Marker position={pos} key={truck.objectid} />
