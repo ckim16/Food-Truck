@@ -14,6 +14,7 @@ class TruckMap extends Component {
       selectedPlace: {}
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClick = this.onMapClick.bind(this);
   }
 
   onMarkerClick(props, marker, e) {
@@ -23,6 +24,15 @@ class TruckMap extends Component {
       selectedPlace: props
     });
     console.log(this.state);
+  }
+
+  onMapClick() {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
   }
 
   renderMarkers() {    
@@ -48,7 +58,7 @@ class TruckMap extends Component {
     const pos = {lat: 37.759703, lng: -122.428093}
     return (
       <div style={style}>
-        <GoogleMap google={window.google}>
+        <GoogleMap google={window.google} onClick={this.onMapClick}>
           {this.renderMarkers()}
           <InfoWindow
             marker={this.state.activeMarker}
