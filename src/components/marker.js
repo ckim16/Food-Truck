@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes as T } from 'react';
 import { camelize } from '../helper/camelize';
 
-const evtNames = ['click', 'mouseover']
+const evtNames = ['click', 'mouseover', 'recenter', 'dragend'];
 
 export default class Marker extends Component {
   componentDidUpdate(prevProps) {
@@ -46,7 +46,7 @@ export default class Marker extends Component {
     });
   }
 
-  handleEvent(evtName) {
+  handleEvent(evt) {
     return (e) => {
       const evtName = `on${camelize(evt)}`
       if (this.props[evtName]) {
@@ -64,3 +64,5 @@ Marker.propTypes = {
   position: React.PropTypes.object,
   map: React.PropTypes.object
 }
+
+evtNames.forEach(e => Marker.propTypes[e] = T.func)

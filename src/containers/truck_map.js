@@ -16,7 +16,7 @@ class TruckMap extends Component {
     this.onMarkerClick = this.onMarkerClick.bind(this);
   }
 
-  onMarkerClick() {
+  onMarkerClick(props, marker, e) {
     this.setState({
       showingInfoWindow: true,
       activeMarker: marker,
@@ -37,7 +37,7 @@ class TruckMap extends Component {
       return this.props.allTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
         return (
-          <Marker position={pos} key={truck.objectid} />
+          <Marker position={pos} key={truck.objectid} name={truck.applicant} location={truck.locationdescription} hour={truck.dayshours} onClick={this.onMarkerClick} />
         );
       });
     }
