@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { camelize } from '../helper/camelize';
+
+const evtNames = ['click', 'mouseover']
 
 export default class Marker extends Component {
   componentDidUpdate(prevProps) {
-    console.log('MarkerDidUpdate', this.props);
     if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
         // The relevant props have changed
@@ -13,22 +15,21 @@ export default class Marker extends Component {
 
   //may need componentDidMount
   componentDidMount() {
-    console.log('MarkerDidMount');
     this.renderMarker();
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log('will update', nextProps);
-  }
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log('will update', nextProps);
+  // }
 
   componentWillUnmount() {
-    console.log('UNMOUNT', this.props)
     if (this.props) {
       this.marker.setMap(null);
     }
   }
 
   renderMarker() {
+    const evtNames = ['click', 'mouseover'];
     let {
       map, google, position, mapCenter
     } = this.props;
@@ -40,6 +41,18 @@ export default class Marker extends Component {
         position: position
     };
     this.marker = new google.maps.Marker(pref);
+    evtNames.forEach(e => {
+      this.marker.addListener(e, this.handleEvent(e));
+    });
+  }
+
+  handleEvent(evtName) {
+    return (e) => {
+      const evtName = `on${camelize(evt)}`
+      if (this.props[evtName]) {
+        this.props[evtName](this.props, this.marker, e);
+      }
+    }
   }
 
   render() {

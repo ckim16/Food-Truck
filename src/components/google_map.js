@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes as T } from 'react';
 import ReactDOM from 'react-dom';
-
-// const latLng = {lat: 37.742972, lng: -122.431297};
+import { camelize } from '../helper/camelize';
+const evtNames = ['ready', 'click', 'dragend'];
 
 export default class GoogleMap extends Component {
   constructor(props) {
@@ -51,8 +51,8 @@ export default class GoogleMap extends Component {
     const maps = google.maps;
 
     if (map) {
-        let center = new maps.LatLng(curr.lat, curr.lng)
-        map.panTo(center)
+        let center = new maps.LatLng(curr.lat, curr.lng);
+        map.panTo(center);
     }
   }
 
@@ -75,6 +75,28 @@ export default class GoogleMap extends Component {
         minZoom: 12
       });
       this.map = new maps.Map(node, mapConfig);
+      evtNames.forEach(e => {
+        this.map.addListener(e, this.handleEvent(e));
+      });
+
+      maps.event.trigger(this.map, 'ready');
+    }
+  }
+
+  handleEvent(evtName) {
+    let timeout;
+    const handlerName = `on${camelize(evtName)}`;
+
+    return (e) => {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      timeout = setTimeout(() => {
+        if (this.props[handlerName]) {
+          this.props[handlerName](this.props, this.map, e);
+        }
+      }, 0);
     }
   }
 
@@ -101,8 +123,11 @@ GoogleMap.propTypes = {
   google: React.PropTypes.object,
   zoom: React.PropTypes.number,
   initialCenter: React.PropTypes.object,
-  centerAroundCurrentLocation: React.PropTypes.bool
-}
+  centerAroundCurrentLocation: React.PropTypes.bool,
+  onMove: React.PropTypes.func,
+};
+
+evtNames.forEach(e => GoogleMap.propTypes[e] = T.func)
 
 GoogleMap.defaultProps = {
   minZoom: 12,
