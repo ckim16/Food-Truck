@@ -32,6 +32,21 @@ export default class InfoWindow extends Component {
     const iw = this.infowindow = new google.maps.InfoWindow({
       content: ''
     });
+
+    google.maps.event.addListener(iw, 'closeclick', this.onClose.bind(this))
+    google.maps.event.addListener(iw, 'domready', this.onOpen.bind(this));
+  }
+
+  onClose() {
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
+  }
+
+  onOpen() {
+    if (this.props.onOpen) {
+      this.props.onOpen();
+    }
   }
 
   updateContent() {

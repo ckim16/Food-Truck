@@ -18,12 +18,18 @@ class TruckMap extends Component {
   }
 
   onMarkerClick(props, marker, e) {
-    this.setState({
-      showingInfoWindow: true,
-      activeMarker: marker,
-      selectedPlace: props
-    });
-    console.log(this.state);
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    } else {
+      this.setState({
+        showingInfoWindow: true,
+        activeMarker: marker,
+        selectedPlace: props
+      });  
+    }
   }
 
   onMapClick() {
@@ -62,7 +68,8 @@ class TruckMap extends Component {
           {this.renderMarkers()}
           <InfoWindow
             marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
+            visible={this.state.showingInfoWindow}
+            onClose={this.onInfoWindowClose}>
               <div>
                 <p>{this.state.selectedPlace.name}</p>
                 <p>{this.state.selectedPlace.location}</p>
