@@ -37,8 +37,9 @@ export default class Marker extends Component {
 
     const pref = {
         map: map,
+        draggable: false,
         position: position,
-        icon: 'http://www.megaicons.net/static/img/icons_sizes/519/1910/16/mail-truck-icon.png'
+        icon: 'http://www.megaicons.net/static/img/icons_sizes/528/1953/16/truck-icon.png'
     };
     this.marker = new google.maps.Marker(pref);
     evtNames.forEach(e => {
