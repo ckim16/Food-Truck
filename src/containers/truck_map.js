@@ -60,8 +60,8 @@ class TruckMap extends Component {
   }
 
   render() {
-    const style = {width: '60vw', height: '100vh', float: 'left'}
-    const pos = {lat: 37.759703, lng: -122.428093}
+    const style = {width: '60vw', height: '100vh', float: 'left'};
+    const pos = {lat: 37.759703, lng: -122.428093};
     return (
       <div style={style}>
         <GoogleMap google={window.google} onClick={this.onMapClick}>

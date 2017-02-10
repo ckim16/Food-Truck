@@ -4,13 +4,13 @@ import _ from 'lodash';
 
 const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
 
-export function fetchTrucks() {
-  const allTrucks = axios.get(url);
-  return {
-    type: FETCH_TRUCKS,
-    payload: allTrucks
-  };
-}
+// export function fetchTrucks() {
+//   const allTrucks = axios.get(url);
+//   return {
+//     type: FETCH_TRUCKS,
+//     payload: allTrucks
+//   };
+// }
 
 export function filterTrucks(food) {
   const filteredTrucks = [];
