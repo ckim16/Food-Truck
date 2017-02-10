@@ -4,12 +4,13 @@ import { camelize } from '../helper/camelize';
 const evtNames = ['click', 'mouseover', 'recenter', 'dragend'];
 
 export default class Marker extends Component {
-  componentDidUpdate(prevProps) {
-    if ((this.props.map !== prevProps.map) || (this.props.position !== prevProps.position)) {
-      // The relevant props have changed
-      this.renderMarker();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if ((this.props.map !== prevProps.map) || 
+  //     (this.props.position !== prevProps.position)) {
+  //     // The relevant props have changed
+  //     this.renderMarker();
+  //   }
+  // }
 
   //may need componentDidMount
   componentDidMount() {
@@ -17,7 +18,7 @@ export default class Marker extends Component {
   }
 
   // componentWillUpdate(nextProps, nextState) {
-  //   console.log('will update', nextProps);
+  //   this.renderMarker();
   // }
 
   componentWillUnmount() {
@@ -36,8 +37,7 @@ export default class Marker extends Component {
     const pref = {
         map: map,
         draggable: true,
-        position: position,
-        icon: 'http://www.megaicons.net/static/img/icons_sizes/528/1953/16/truck-icon.png'
+        position: position
     };
     this.marker = new google.maps.Marker(pref);
     evtNames.forEach(e => {

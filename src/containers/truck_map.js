@@ -42,18 +42,18 @@ class TruckMap extends Component {
   }
 
   renderMarkers() {    
-    if (this.props.filteredTrucks.length > 0) {
-      return this.props.filteredTrucks.map((truck) => {
-        const pos = {lat: +truck.latitude, lng: +truck.longitude};
-        return (
-          <Marker position={pos} key={truck.objectid} name={truck.applicant} location={truck.locationdescription} hour={truck.dayshours} onClick={this.onMarkerClick}/>
-        );
-      });
-    } else {
+    if (this.props.filteredTrucks.length === 0) {
       return this.props.allTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
         return (
           <Marker position={pos} key={truck.objectid} name={truck.applicant} location={truck.locationdescription} hour={truck.dayshours} onClick={this.onMarkerClick} />
+        );
+      });
+    } else {
+      return this.props.filteredTrucks.map((truck) => {
+        const pos = {lat: +truck.latitude, lng: +truck.longitude};
+        return (
+          <Marker position={pos} key={truck.objectid} name={truck.applicant} location={truck.locationdescription} hour={truck.dayshours} onClick={this.onMarkerClick}/>
         );
       });
     }
@@ -83,7 +83,6 @@ class TruckMap extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state);
   return {
     filteredTrucks: state.trucks
   };

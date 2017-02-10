@@ -4,10 +4,6 @@ import List from '../components/list';
 import { connect } from 'react-redux';
 
 class TruckList extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderTrucks() {
     if (this.props.filteredTrucks.length > 0) {
       return this.props.filteredTrucks.map((filteredTruck) => {

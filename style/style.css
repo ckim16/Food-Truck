@@ -50,6 +50,10 @@ input {
   font-family: 'Barrio';
 }
 
+.list-box:hover {
+  background-color: 'grey';
+}
+
 .search-bar {
   width: 100%;
 }
