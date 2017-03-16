@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function mouseOver() {
-  console.log('hover');
-}
+export default class List extends Component {
+  constructor(props) {
+    super(props);
 
-export default (props) => {
-  return (
-    <div className="list-box" onMouseEnter={mouseOver}>
-      <i className="fa fa-truck" aria-hidden="true"></i>: {props.applicant}<br/>
-      <i className="fa fa-address-book" aria-hidden="true"></i>: {props.address}<br/>
-      <i className="fa fa-info" aria-hidden="true"></i>: {props.facilitytype}
-    </div>
-  );
+    this.mouseOver = this.mouseOver.bind(this);
+  }
+
+  mouseOver() {
+    if (this.props.onMouseHandler) {
+      this.props.onMouseHandler();
+    } else {
+      console.log('no');
+    }
+  }
+ 
+  render() {
+    return(
+      <div className="list-box" onMouseEnter={this.mouseOver}>
+        <i className="fa fa-truck" aria-hidden="true"></i>: {props.applicant}<br/>
+        <i className="fa fa-address-book" aria-hidden="true"></i>: {props.address}<br/>
+        <i className="fa fa-info" aria-hidden="true"></i>: {props.facilitytype}
+      </div>
+    );
+  }
 }

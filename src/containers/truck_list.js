@@ -8,17 +8,21 @@ class TruckList extends Component {
     super(props);
   }
 
+  onMouseHover() {
+    console.log('hover');
+  }
+
   renderTrucks() {
     if (this.props.filteredTrucks.length > 0) {
       return this.props.filteredTrucks.map((filteredTruck) => {
         return (
-          <List key={filteredTruck.objectid} applicant={filteredTruck.applicant} address={filteredTruck.address} facilitytype={filteredTruck.facilitytype} />
+          <List key={filteredTruck.objectid} applicant={filteredTruck.applicant} address={filteredTruck.address} facilitytype={filteredTruck.facilitytype} onHoverHandler={onMouseHover}/>
         );
       });
     } else {
       return this.props.allTrucks.map((truck) => {
         return (
-          <List key={truck.objectid} applicant={truck.applicant} address={truck.address} facilitytype={truck.facilitytype} />
+          <List key={truck.objectid} applicant={truck.applicant} address={truck.address} facilitytype={truck.facilitytype} onHoverHandler={onMouseHover}/>
         );
       });
     }
