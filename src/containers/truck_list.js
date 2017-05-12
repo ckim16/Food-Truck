@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 class TruckList extends Component {
   constructor(props) {
     super(props);
+
+    this.onMouseHover = this.onMouseHover.bind(this);
   }
 
   onMouseHover() {
@@ -16,13 +18,13 @@ class TruckList extends Component {
     if (this.props.filteredTrucks.length > 0) {
       return this.props.filteredTrucks.map((filteredTruck) => {
         return (
-          <List key={filteredTruck.objectid} applicant={filteredTruck.applicant} address={filteredTruck.address} facilitytype={filteredTruck.facilitytype} onHoverHandler={onMouseHover}/>
+          <List key={filteredTruck.objectid} applicant={filteredTruck.applicant} address={filteredTruck.address} facilitytype={filteredTruck.facilitytype} onHoverHandler={this.onMouseHover}/>
         );
       });
     } else {
       return this.props.allTrucks.map((truck) => {
         return (
-          <List key={truck.objectid} applicant={truck.applicant} address={truck.address} facilitytype={truck.facilitytype} onHoverHandler={onMouseHover}/>
+          <List key={truck.objectid} applicant={truck.applicant} address={truck.address} facilitytype={truck.facilitytype} onHoverHandler={this.onMouseHover}/>
         );
       });
     }

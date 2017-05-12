@@ -8,8 +8,8 @@ export default class List extends Component {
   }
 
   mouseOver() {
-    if (this.props.onMouseHandler) {
-      this.props.onMouseHandler();
+    if (this.props.onHoverHandler) {
+      this.props.onHoverHandler();
     } else {
       console.log('no');
     }
@@ -18,9 +18,9 @@ export default class List extends Component {
   render() {
     return(
       <div className="list-box" onMouseEnter={this.mouseOver}>
-        <i className="fa fa-truck" aria-hidden="true"></i>: {props.applicant}<br/>
-        <i className="fa fa-address-book" aria-hidden="true"></i>: {props.address}<br/>
-        <i className="fa fa-info" aria-hidden="true"></i>: {props.facilitytype}
+        <i className="fa fa-truck" aria-hidden="true"></i>: {this.props.applicant}<br/>
+        <i className="fa fa-address-book" aria-hidden="true"></i>: {this.props.address}<br/>
+        <i className="fa fa-info" aria-hidden="true"></i>: {this.props.facilitytype}
       </div>
     );
   }
