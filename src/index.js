@@ -6,10 +6,11 @@ import reduxThunk from 'redux-thunk';
 
 import App from './components/app';
 import reducers from './reducers';
+import { fetchTrucks } from './actions/index';
 
-// const createStoreWithMiddleware = applyMiddleware()(createStore);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)));
+store.dispatch(fetchTrucks());
 
 ReactDOM.render(
   <Provider store={store}>
