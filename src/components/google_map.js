@@ -17,6 +17,7 @@ export default class GoogleMap extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('did update?', prevProps)
     if (prevProps.google !== this.props.google) {
       console.log('DidUpdate');
       this.loadMap();
@@ -27,19 +28,19 @@ export default class GoogleMap extends Component {
   }
 
   componentDidMount() {
-    if (this.props.centerAroundCurrentLocation) {
-        if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                const coords = pos.coords;
-                this.setState({
-                    currentLocation: {
-                        lat: coords.latitude,
-                        lng: coords.longitude
-                    }
-                })
-            });
-        }
-    }
+    // if (this.props.centerAroundCurrentLocation) {
+    //     if (navigator && navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition((pos) => {
+    //             const coords = pos.coords;
+    //             this.setState({
+    //                 currentLocation: {
+    //                     lat: coords.latitude,
+    //                     lng: coords.longitude
+    //                 }
+    //             })
+    //         });
+    //     }
+    // }
     this.loadMap();
   }
 
