@@ -8,7 +8,6 @@ export function fetchTrucks() {
   return function(dispatch) {
     axios.get(url)
     .then(function(response) {
-      console.log('response', response);
       dispatch({
         type: FETCH_TRUCKS,
         payload: response.data
