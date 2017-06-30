@@ -7,10 +7,11 @@ const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
 export function fetchTrucks() {
   return function(dispatch) {
     axios.get(url)
-    .then(function(trucks) {
+    .then(function(response) {
+      console.log('response', response);
       dispatch({
         type: FETCH_TRUCKS,
-        payload: trucks
+        payload: response.data
       });
     }).catch(function(err) { console.log('fetch trucks error', err); });
   }
@@ -20,8 +21,8 @@ export function filterTrucks(food) {
   const filteredTrucks = [];
   return function(dispatch) {
     axios.get(url)
-    .then(function(trucks) {
-      _.forEach(trucks.data, function(truck) {
+    .then(function(response) {
+      _.forEach(response.data, function(truck) {
         if (truck.fooditems !== undefined) {
             const item = truck.fooditems.toLowerCase();
             if (item.includes(food) === true) {
