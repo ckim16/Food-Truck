@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
 import List from '../components/list';
 import { connect } from 'react-redux';
 
 class TruckList extends Component {
   constructor(props) {
     super(props);
-
     this.onMouseHover = this.onMouseHover.bind(this);
   }
 
@@ -29,8 +28,8 @@ class TruckList extends Component {
       });
     }
   }
-  
-  render() { 
+
+  render() {
     return(
       <div className="truckDescription">
         {this.renderTrucks()}
@@ -41,7 +40,8 @@ class TruckList extends Component {
 
 function mapStateToProps(state) {
   return {
-    filteredTrucks: state.trucks
+    allTrucks: state.allTrucks,
+    filteredTrucks: state.filteredTrucks
   };
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import GoogleMap from '../components/google_map';
 import Marker from '../components/marker';
 import InfoWindow from '../components/infoWindow';
@@ -28,7 +29,7 @@ class TruckMap extends Component {
         showingInfoWindow: true,
         activeMarker: marker,
         selectedPlace: props
-      });  
+      });
     }
   }
 
@@ -41,7 +42,7 @@ class TruckMap extends Component {
     }
   }
 
-  renderMarkers() {    
+  renderMarkers() {
     if (this.props.filteredTrucks.length === 0) {
       return this.props.allTrucks.map((truck) => {
         const pos = {lat: +truck.latitude, lng: +truck.longitude};
@@ -84,7 +85,8 @@ class TruckMap extends Component {
 
 function mapStateToProps(state) {
   return {
-    filteredTrucks: state.trucks
+    allTrucks: state.allTrucks,
+    filteredTrucks: state.filteredTrucks
   };
 }
 

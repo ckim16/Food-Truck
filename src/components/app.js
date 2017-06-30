@@ -5,7 +5,7 @@ import SearchBar from '../containers/search_bar';
 import TruckMap from '../containers/truck_map';
 import TruckList from '../containers/truck_list';
 
-const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
+// const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
 
 export default class App extends Component {
   // constructor(props) {

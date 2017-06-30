@@ -1,26 +1,60 @@
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+
 import { camelize } from '../helper/camelize';
-const evtNames = ['ready', 'click', 'dragend'];
+
+const evtNames = [
+  'ready',
+  'click',
+  'dragend',
+  'recenter',
+  'bounds_changed',
+  'center_changed',
+  'dblclick',
+  'dragstart',
+  'heading_change',
+  'idle',
+  'maptypeid_changed',
+  'mousemove',
+  'mouseout',
+  'mouseover',
+  'projection_changed',
+  'resize',
+  'rightclick',
+  'tilesloaded',
+  'tilt_changed',
+  'zoom_changed'
+];
 
 export default class GoogleMap extends Component {
   constructor(props) {
     super(props);
 
     const {lat, lng} = this.props.initialCenter;
+    this.listeners = {};
     this.state = {
       currentLocation: {
-        lat: lat,
-        lng: lng
+        lat,
+        lng
       }
-    }
+    };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('did update?', prevProps)
     if (prevProps.google !== this.props.google) {
-      console.log('DidUpdate');
       this.loadMap();
+    }
+    if (this.props.visible !== prevProps.visible) {
+        this.restyleMap();
+    }
+    if (this.props.zoom !== prevProps.zoom) {
+      this.map.setZoom(this.props.zoom);
+    }
+    if (this.props.center !== prevProps.center) {
+      this.setState({
+        currentLocation: this.props.center
+      });
     }
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
@@ -28,19 +62,6 @@ export default class GoogleMap extends Component {
   }
 
   componentDidMount() {
-    // if (this.props.centerAroundCurrentLocation) {
-    //     if (navigator && navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition((pos) => {
-    //             const coords = pos.coords;
-    //             this.setState({
-    //                 currentLocation: {
-    //                     lat: coords.latitude,
-    //                     lng: coords.longitude
-    //                 }
-    //             })
-    //         });
-    //     }
-    // }
     this.loadMap();
   }
 
@@ -53,7 +74,16 @@ export default class GoogleMap extends Component {
 
     if (map) {
         let center = new maps.LatLng(curr.lat, curr.lng);
-        map.panTo(center);
+        // map.panTo(center);
+        map.setCenter(center);
+        maps.event.trigger(map, 'recenter')
+    }
+  }
+
+  restyleMap() {
+    if (this.map) {
+      const {google} = this.props;
+      google.maps.event.trigger(this.map, 'resize');
     }
   }
 
@@ -64,23 +94,19 @@ export default class GoogleMap extends Component {
       const mapRef = this.refs.map;
       const node = ReactDOM.findDOMNode(mapRef);
 
-      // let zoom = 13;
-      // let lat = 37.763972;
-      // let lng = -122.431297;
       let {initialCenter, zoom} = this.props;
       const {lat, lng} = this.state.currentLocation;
       const center = new maps.LatLng(lat, lng);
       const mapConfig = Object.assign({}, {
-        center: center,
-        zoom: zoom,
-        minZoom: 12
+        center,
+        zoom
       });
       this.map = new maps.Map(node, mapConfig);
       evtNames.forEach(e => {
-        this.map.addListener(e, this.handleEvent(e));
+        this.listeners[e] = this.map.addListener(e, this.handleEvent(e));
       });
-
       maps.event.trigger(this.map, 'ready');
+      this.forceUpdate();
     }
   }
 
@@ -115,20 +141,22 @@ export default class GoogleMap extends Component {
 
   render() {
     return (
-      <div ref="map" className="map">{this.renderChildren()}</div>
+      <div ref="map" className="map">
+        {this.renderChildren()}
+      </div>
     );
   }
 }
 
 GoogleMap.propTypes = {
-  google: React.PropTypes.object,
-  zoom: React.PropTypes.number,
-  initialCenter: React.PropTypes.object,
-  centerAroundCurrentLocation: React.PropTypes.bool,
-  onMove: React.PropTypes.func,
+  google: PropTypes.object,
+  zoom: PropTypes.number,
+  initialCenter: PropTypes.object,
+  centerAroundCurrentLocation: PropTypes.bool,
+  onMove: PropTypes.func,
 };
 
-evtNames.forEach(e => GoogleMap.propTypes[e] = T.func)
+evtNames.forEach(e => GoogleMap.propTypes[e] = PropTypes.func)
 
 GoogleMap.defaultProps = {
   minZoom: 12,
@@ -137,6 +165,5 @@ GoogleMap.defaultProps = {
   initialCenter: {
     lat: 37.763972,
     lng: -122.431297
-  },
-  centerAroundCurrentLocation: false
-}
+  }
+};

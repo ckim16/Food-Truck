@@ -1,11 +1,13 @@
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { camelize } from '../helper/camelize';
 
 const evtNames = ['click', 'mouseover', 'recenter', 'dragend'];
 
 export default class Marker extends Component {
   // componentDidUpdate(prevProps) {
-  //   if ((this.props.map !== prevProps.map) || 
+  //   if ((this.props.map !== prevProps.map) ||
   //     (this.props.position !== prevProps.position)) {
   //     // The relevant props have changed
   //     this.renderMarker();
@@ -59,9 +61,7 @@ export default class Marker extends Component {
   }
 }
 
-Marker.propTypes = {
-  position: React.PropTypes.object,
-  map: React.PropTypes.object
-}
-
-evtNames.forEach(e => Marker.propTypes[e] = T.func)
+Marker.PropTypes = {
+  position: PropTypes.object,
+  map: PropTypes.object
+};
