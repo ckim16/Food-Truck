@@ -1,2 +1,3 @@
 export const FETCH_TRUCKS = 'FETCH_TRUCKS';
 export const FILTER_TRUCKS = 'FILTER_TRUCKS';
+export const ON_HOVER_TRUCK = 'ON_HOVER_TRUCK';

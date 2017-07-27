@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_TRUCKS, FILTER_TRUCKS } from './types';
+import { FETCH_TRUCKS, FILTER_TRUCKS, ON_HOVER_TRUCK } from './types';
 import _ from 'lodash';
 
 const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
@@ -35,4 +35,11 @@ export function filterTrucks(food) {
       });
     });
   }
+}
+
+export function onHoverTruck(truck) {
+  return {
+    type: ON_HOVER_TRUCK,
+    payload: truck
+  };
 }
