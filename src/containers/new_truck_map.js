@@ -47,6 +47,7 @@ class NewTruckMap extends Component {
       return (
         <div className="map">
           <GoogleMap
+            options={{minZoom: 12}}
             center={[this.state.lat, this.state.lng]}
             zoom={this.state.zoom}
             onChildClick={this._onChildClick}
