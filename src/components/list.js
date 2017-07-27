@@ -17,8 +17,14 @@ export default class List extends Component {
   }
 
   render() {
+    const style = this.props.hover ? {backgroundColor: '#E3E2E3'} : {backgroundColor: '#FFFFFF'};
     return(
-      <div className="list-box" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
+      <div
+        className="list-box"
+        onMouseEnter={this._onMouseEnter}
+        onMouseLeave={this._onMouseLeave}
+        style={style}
+        >
         <i className="fa fa-truck" aria-hidden="true"></i>: {this.props.applicant}<br/>
         <i className="fa fa-address-book" aria-hidden="true"></i>: {this.props.address}<br/>
         <i className="fa fa-info" aria-hidden="true"></i>: {this.props.facilitytype}

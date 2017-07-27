@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import List from '../components/list';
-import { connect } from 'react-redux';
 import { onHoverTruck } from '../actions/index';
 
 class TruckList extends Component {
   constructor(props) {
     super(props);
-    // this._onHover = this._onHover.bind(this);
-    // this._onLeave = this._onLeave.bind(this);
   }
 
   renderTrucks() {
@@ -24,9 +22,9 @@ class TruckList extends Component {
           applicant={truck.applicant}
           address={truck.address}
           facilitytype={truck.facilitytype}
-          onHover={() => this.props.onHoverTruck(truck.objectid)}
+          onHover={() => this.props.onHoverTruck(truck.latitude)}
           onLeave={() => this.props.onHoverTruck(null)}
-          hover={this.props.hoverTruck == truck.objectid}
+          hover={this.props.hoverTruck == truck.latitude}
           />
       );
     });
