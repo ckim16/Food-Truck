@@ -2,31 +2,35 @@ import React, { Component } from 'react';
 
 import List from '../components/list';
 import { connect } from 'react-redux';
+import { onHoverTruck } from '../actions/index';
 
 class TruckList extends Component {
   constructor(props) {
     super(props);
-    this.onMouseHover = this.onMouseHover.bind(this);
-  }
-
-  onMouseHover() {
-    console.log('hover');
+    // this._onHover = this._onHover.bind(this);
+    // this._onLeave = this._onLeave.bind(this);
   }
 
   renderTrucks() {
-    if (this.props.filteredTrucks.length > 0) {
-      return this.props.filteredTrucks.map((filteredTruck) => {
-        return (
-          <List key={filteredTruck.objectid} applicant={filteredTruck.applicant} address={filteredTruck.address} facilitytype={filteredTruck.facilitytype} onHoverHandler={this.onMouseHover}/>
-        );
-      });
-    } else {
-      return this.props.allTrucks.map((truck) => {
-        return (
-          <List key={truck.objectid} applicant={truck.applicant} address={truck.address} facilitytype={truck.facilitytype} onHoverHandler={this.onMouseHover}/>
-        );
-      });
+    if (!this.props.trucks) {
+      return (
+        <div>Loading Lists....</div>
+      )
     }
+    return this.props.trucks.map((truck) => {
+      return (
+        <List
+          key={truck.objectid}
+          applicant={truck.applicant}
+          address={truck.address}
+          facilitytype={truck.facilitytype}
+          onHover={() => this.props.onHoverTruck(truck.objectid)}
+          onLeave={() => this.props.onHoverTruck(null)}
+          hover={this.props.hoverTruck == truck.objectid}
+          />
+      );
+    });
+
   }
 
   render() {
@@ -40,9 +44,15 @@ class TruckList extends Component {
 
 function mapStateToProps(state) {
   return {
-    allTrucks: state.allTrucks,
-    filteredTrucks: state.filteredTrucks
+    trucks: state.trucks,
+    hoverTruck: state.hoverTruck
   };
 }
 
-export default connect(mapStateToProps)(TruckList);
+function mapDispatchToProps(dispatch) {
+  return {
+    onHoverTruck: (id) => dispatch(onHoverTruck(id))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TruckList);

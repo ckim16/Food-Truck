@@ -1,16 +1,18 @@
-import { FETCH_TRUCKS, FILTER_TRUCKS } from '../actions/types';
+import { FETCH_TRUCKS, FILTER_TRUCKS, ON_HOVER_TRUCK } from '../actions/types';
 
-export function allTrucks(state=[], action) {
+export function trucks(state=null, action) {
   switch(action.type) {
     case FETCH_TRUCKS:
+      return action.payload;
+    case FILTER_TRUCKS:
       return action.payload;
   }
   return state;
 }
 
-export function filteredTrucks(state=[], action) {
+export function hoverTruck(state=null, action) {
   switch(action.type) {
-    case FILTER_TRUCKS:
+    case ON_HOVER_TRUCK:
       return action.payload;
   }
   return state;

@@ -34,7 +34,7 @@ input {
 
 .truckDescription {
   height: 100%;
-  width: 40%;
+  width: 20%;
   float: left;
   border: 1px solid #ddd;
   overflow-y: auto;
@@ -65,6 +65,6 @@ input {
 .map {
   height: 100%;
   position: relative !important;
-  width: 60vw !important;
+  width: 80vw !important;
   float: left !important;
 }
