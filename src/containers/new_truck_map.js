@@ -20,8 +20,7 @@ class NewTruckMap extends Component {
   }
 
   _onChildMouseEnter(key, childProps) {
-    console.log('MouseEnter', key, childProps);
-    this.props.onHoverTruck(key);
+    this.props.onHoverTruck(childProps.lat);
   }
 
   _onChildMouseLeave() {
@@ -41,7 +40,7 @@ class NewTruckMap extends Component {
             lat={truck.latitude}
             lng={truck.longitude}
             block={truck.block}
-            hover={this.props.hoverTruck == truck.objectid}
+            hover={this.props.hoverTruck == truck.latitude}
             />
         );
       });
@@ -63,7 +62,6 @@ class NewTruckMap extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state)
   return {
     trucks: state.trucks,
     hoverTruck: state.hoverTruck
