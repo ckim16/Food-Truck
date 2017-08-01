@@ -15,8 +15,13 @@ class NewTruckMap extends Component {
       zoom: 13
     };
 
+    this._onChildClick = this._onChildClick.bind(this);
     this._onChildMouseEnter = this._onChildMouseEnter.bind(this);
     this._onChildMouseLeave = this._onChildMouseLeave.bind(this);
+  }
+
+  _onChildClick(key, childProps) {
+    this.setState({ lat: +childProps.lat, lng: +childProps.lng });
   }
 
   _onChildMouseEnter(key, childProps) {
