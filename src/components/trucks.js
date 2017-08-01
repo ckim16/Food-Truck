@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
-import { greatPlaceStyle, greatPlaceStyleHover } from '../helper/truck_style';
+import { greatPlaceStyle, greatPlaceStyleHover, tooltipStyle } from '../helper/truck_style';
 
 export default class Trucks extends Component {
   render() {
     // const style = this.props.hover ? greatPlaceStyleHover : greatPlaceStyle;
-    const style = this.props.hover ? {color: 'red', cursor: 'poiner'} : {color: 'blue', cursor: 'pointer'};
+    const style = this.props.hover ? {color: 'red', cursor: 'pointer', zIndex: '500000px', fontSize: '20px'} : {color: 'blue', cursor: 'pointer', zIndex: '-500000px', fontSize: '10px'};
+    const ts = this.props.hover ? tooltipStyle : {display: 'none'};
     return (
       <i className="fa fa-truck fa2x" style={style}>
-          <div style={{width: 80}} className="hint__content">
-            ?
+          <div style={ts} className="hint__content">
+            Name: {this.props.name}<br/>
+            Hours: {this.props.hours}
           </div>
        </i>
     );

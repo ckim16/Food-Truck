@@ -26,4 +26,19 @@ const greatPlaceStyleHover = {
   color: '#f44336'
 };
 
-export { greatPlaceStyle, greatPlaceStyleHover, K_SIZE };
+const tooltipStyle = {
+  position: 'absolute',
+  width: '200px',
+  height: 'relative',
+  padding: '2px',
+  fontSize: '14px',
+  backgroundColor: 'lightsteelblue',
+  border: '0px',
+  borderRadius: '8px',
+  pointerEvents: 'none',
+  bottom: '125%',
+  color: '#FFFFFF',
+  zIndex: '5000'
+};
+
+export { greatPlaceStyle, greatPlaceStyleHover, tooltipStyle, K_SIZE };

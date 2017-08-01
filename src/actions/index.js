@@ -8,9 +8,12 @@ export function fetchTrucks() {
   return function(dispatch) {
     axios.get(url)
     .then(function(response) {
+      const staticTrucks = response.data.filter((truck) => {
+        return truck.latitude != 0;
+      });
       dispatch({
         type: FETCH_TRUCKS,
-        payload: response.data
+        payload: staticTrucks
       });
     }).catch(function(err) { console.log('fetch trucks error', err); });
   }

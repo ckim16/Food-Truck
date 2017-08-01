@@ -41,6 +41,8 @@ class NewTruckMap extends Component {
             lng={truck.longitude}
             block={truck.block}
             hover={this.props.hoverTruck == truck.latitude}
+            name={truck.applicant}
+            hours={truck.dayshours}
             />
         );
       });
