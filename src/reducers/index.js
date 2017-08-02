@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import { trucks, hoverTruck } from './reducer_truck';
+import { trucks, hoverTruck, centerChange } from './reducer_truck';
 
 const rootReducer = combineReducers({
   trucks,
-  hoverTruck
+  hoverTruck,
+  center: centerChange
 });
 
 export default rootReducer;

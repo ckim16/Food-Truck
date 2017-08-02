@@ -3,15 +3,13 @@ import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux';
 
 import Trucks from '../components/trucks';
-import { onHoverTruck } from '../actions/index';
+import { onHoverTruck, onCenterChange } from '../actions/index';
 
 class NewTruckMap extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      lat: 37.763972,
-      lng: -122.431297,
       zoom: 13
     };
 
@@ -21,7 +19,7 @@ class NewTruckMap extends Component {
   }
 
   _onChildClick(key, childProps) {
-    this.setState({ lat: +childProps.lat, lng: +childProps.lng });
+    this.props.onCenterChange([+childProps.lat, +childProps.lng]);
   }
 
   _onChildMouseEnter(key, childProps) {
@@ -48,19 +46,19 @@ class NewTruckMap extends Component {
             hover={this.props.hoverTruck == truck.latitude}
             name={truck.applicant}
             hours={truck.dayshours}
-            />
+          />
         );
       });
       return (
         <div className="map">
           <GoogleMap
             options={{minZoom: 12}}
-            center={[this.state.lat, this.state.lng]}
+            center={this.props.center}
             zoom={this.state.zoom}
             onChildClick={this._onChildClick}
             onChildMouseEnter={this._onChildMouseEnter}
             onChildMouseLeave={this._onChildMouseLeave}
-            >
+          >
             {trucks}
           </GoogleMap>
         </div>
@@ -72,13 +70,15 @@ class NewTruckMap extends Component {
 function mapStateToProps(state) {
   return {
     trucks: state.trucks,
-    hoverTruck: state.hoverTruck
+    hoverTruck: state.hoverTruck,
+    center: state.center
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onHoverTruck: (key) => dispatch(onHoverTruck(key))
+    onHoverTruck: (key) => dispatch(onHoverTruck(key)),
+    onCenterChange: ([lat, lng]) => dispatch(onCenterChange([lat, lng]))
   };
 }
 

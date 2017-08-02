@@ -13,7 +13,7 @@ export default class Trucks extends Component {
             Name: {this.props.name}<br/>
             Hours: {this.props.hours}
           </div>
-       </i>
+      </i>
     );
   }
 }

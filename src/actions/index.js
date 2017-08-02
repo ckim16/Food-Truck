@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_TRUCKS, FILTER_TRUCKS, ON_HOVER_TRUCK } from './types';
+import {
+  FETCH_TRUCKS,
+  FILTER_TRUCKS,
+  ON_HOVER_TRUCK,
+  ON_CENTER_CHANGE
+} from './types';
 import _ from 'lodash';
 
 const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
@@ -44,5 +49,12 @@ export function onHoverTruck(truck) {
   return {
     type: ON_HOVER_TRUCK,
     payload: truck
+  };
+}
+
+export function onCenterChange([lat, lng]) {
+  return {
+    type: ON_CENTER_CHANGE,
+    payload: [lat, lng]
   };
 }

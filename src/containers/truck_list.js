@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import List from '../components/list';
-import { onHoverTruck } from '../actions/index';
+import { onHoverTruck, onCenterChange } from '../actions/index';
 
 class TruckList extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class TruckList extends Component {
     if (!this.props.trucks) {
       return (
         <div>Loading Lists....</div>
-      )
+      );
     }
     return this.props.trucks.map((truck) => {
       return (
@@ -24,8 +24,9 @@ class TruckList extends Component {
           facilitytype={truck.facilitytype}
           onHover={() => this.props.onHoverTruck(truck.latitude)}
           onLeave={() => this.props.onHoverTruck(null)}
+          click={() => this.props.onCenterChange([+truck.latitude, +truck.longitude])}
           hover={this.props.hoverTruck == truck.latitude}
-          />
+        />
       );
     });
 
@@ -49,7 +50,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onHoverTruck: (id) => dispatch(onHoverTruck(id))
+    onHoverTruck: (id) => dispatch(onHoverTruck(id)),
+    onCenterChange: ([lat, lng]) => dispatch(onCenterChange([lat, lng]))
   };
 }
 
