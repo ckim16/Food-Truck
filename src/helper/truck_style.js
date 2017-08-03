@@ -28,7 +28,7 @@ const greatPlaceStyleHover = {
 
 const tooltipStyle = {
   position: 'absolute',
-  width: '200px',
+  width: '250px',
   height: 'relative',
   padding: '2px',
   fontSize: '14px',

@@ -9,8 +9,9 @@ export default class Trucks extends Component {
     const ts = this.props.hover ? tooltipStyle : {display: 'none'};
     return (
       <i className="fa fa-truck fa2x" style={style}>
-          <div style={ts} className="hint__content">
+          <div style={ts}>
             Name: {this.props.name}<br/>
+            Menu: {this.props.menu}<br/>
             Hours: {this.props.hours}
           </div>
       </i>
