@@ -14,8 +14,14 @@ class NewTruckMap extends Component {
     };
 
     this._onChildClick = this._onChildClick.bind(this);
+    this._onBoundChange = this._onBoundChange.bind(this);
     this._onChildMouseEnter = this._onChildMouseEnter.bind(this);
     this._onChildMouseLeave = this._onChildMouseLeave.bind(this);
+  }
+
+  _onBoundChange({bound, center}) {
+    console.log('center', center);
+    this.props.onCenterChange(center);
   }
 
   _onChildClick(key, childProps) {
@@ -33,7 +39,7 @@ class NewTruckMap extends Component {
   render() {
     if (!this.props.trucks) {
       return (
-        <div>Loading Trucks...</div>
+        <div className="map">Loading Trucks...</div>
       )
     } else {
       const trucks = this.props.trucks.map((truck) => {
@@ -57,6 +63,7 @@ class NewTruckMap extends Component {
             center={this.props.center}
             zoom={this.state.zoom}
             onChildClick={this._onChildClick}
+            onBouncChange={this._onBoundChange}
             onChildMouseEnter={this._onChildMouseEnter}
             onChildMouseLeave={this._onChildMouseLeave}
           >

@@ -12,7 +12,7 @@ class TruckList extends Component {
   renderTrucks() {
     if (!this.props.trucks) {
       return (
-        <div>Loading Lists....</div>
+        <div className="truckDescription" style={{width: '100%'}}>Loading Lists....</div>
       );
     }
     return this.props.trucks.map((truck) => {
