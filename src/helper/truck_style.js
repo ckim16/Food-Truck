@@ -17,13 +17,15 @@ const greatPlaceStyle = {
   fontSize: 11,
   fontWeight: 'bold',
   padding: 4,
-  cursor: 'pointer'
+  cursor: 'pointer',
+  zIndex: -1
 };
 
 const greatPlaceStyleHover = {
   ...greatPlaceStyle,
   border: '5px solid #3f51b5',
-  color: '#f44336'
+  color: '#f44336',
+  zIndex: 10000
 };
 
 const tooltipStyle = {
