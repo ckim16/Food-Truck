@@ -40,7 +40,7 @@ class NewTruckMap extends Component {
     if (!this.props.trucks) {
       return (
         <div className="map">Loading Trucks...</div>
-      )
+      );
     } else {
       const trucks = this.props.trucks.map((truck) => {
         return (
