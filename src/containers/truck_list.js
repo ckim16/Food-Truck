@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import List from '../components/list';
+import { onHoverTruck, onCenterChange } from '../actions/index';
+
 class TruckList extends Component {
   constructor(props) {
     super(props);
-
-    this.renderTrucks = this.renderTrucks.bind(this);
   }
 
   renderTrucks() {
-    if (this.props.filteredTrucks.length === 0) {
-      return this.props.allTrucks.map((truck) => {
-        return (
-          <div className="list-box" key={truck.objectid}>
-            Name: {truck.applicant}<br/>
-            Address: {truck.address}<br/>
-            Type: {truck.facilitytype}
-          </div>
-        );
-      });
-    } else {
-      return this.props.filteredTrucks.map((filteredTruck) => {
-        return (
-          <div className="list-box" key={filteredTruck.objectid}>
-            Name: {filteredTruck.applicant}<br/>
-            Address: {filteredTruck.address}<br/>
-            Type: {filteredTruck.facilitytype}
-          </div>
-        );
-      });
+    if (!this.props.trucks) {
+      return (
+        <div className="truckDescription" style={{width: '100%'}}>Loading Lists....</div>
+      );
     }
+    return this.props.trucks.map((truck) => {
+      return (
+        <List
+          key={truck.objectid}
+          applicant={truck.applicant}
+          address={truck.address}
+          facilitytype={truck.facilitytype}
+          onHover={() => this.props.onHoverTruck(truck.latitude)}
+          onLeave={() => this.props.onHoverTruck(null)}
+          click={() => this.props.onCenterChange([+truck.latitude, +truck.longitude])}
+          hover={this.props.hoverTruck == truck.latitude}
+        />
+      );
+    });
+
   }
-  
-  render() { 
+
+  render() {
     return(
       <div className="truckDescription">
         {this.renderTrucks()}
@@ -43,8 +43,16 @@ class TruckList extends Component {
 
 function mapStateToProps(state) {
   return {
-    filteredTrucks: state.trucks
+    trucks: state.trucks,
+    hoverTruck: state.hoverTruck
   };
 }
 
-export default connect(mapStateToProps)(TruckList);
+function mapDispatchToProps(dispatch) {
+  return {
+    onHoverTruck: (id) => dispatch(onHoverTruck(id)),
+    onCenterChange: ([lat, lng]) => dispatch(onCenterChange([lat, lng]))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TruckList);

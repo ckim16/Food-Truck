@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import { filterTrucks } from '../actions/index';
 
 class SearchBar extends Component {
@@ -26,7 +27,7 @@ class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.onFormSubmit} className="input-group">
-        <input 
+        <input
           placeholder="What do you feel like eating now?"
           className="form-control"
           value={this.state.food}

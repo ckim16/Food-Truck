@@ -11,8 +11,8 @@ input {
 }
 
 .input-group {
-  width: 350px !important;
-  /*margin: 20px 0px;*/
+  width: 400px !important;
+  vertical-align: middle;
   position: fixed;
   top: 10px;
   left: 150px;
@@ -34,17 +34,20 @@ input {
 
 .truckDescription {
   height: 100%;
-  width: 30%;
+  width: 20%;
   float: left;
   border: 1px solid #ddd;
   overflow-y: auto;
+  cursor: pointer;
 }
 
 .list-box {
+  padding-left: 5px;
   width: 100%;
   border: 2px solid black;
   margin-bottom: 1px;
   font-size: 12px;
+  font-family: 'Barrio';
 }
 
 .search-bar {
@@ -58,6 +61,6 @@ input {
 .map {
   height: 100%;
   position: relative !important;
-  width: 60vw !important;
+  width: 80vw !important;
   float: left !important;
 }

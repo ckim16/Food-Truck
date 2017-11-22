@@ -1,23 +1,35 @@
 import axios from 'axios';
-import { FETCH_TRUCKS, FILTER_TRUCKS } from './types';
+import {
+  FETCH_TRUCKS,
+  FILTER_TRUCKS,
+  ON_HOVER_TRUCK,
+  ON_CENTER_CHANGE
+} from './types';
 import _ from 'lodash';
 
 const url = `https://data.sfgov.org/resource/6a9r-agq8.json`;
 
 export function fetchTrucks() {
-  const allTrucks = axios.get(url);
-  return {
-    type: FETCH_TRUCKS,
-    payload: allTrucks
-  };
+  return function(dispatch) {
+    axios.get(url)
+    .then(function(response) {
+      const staticTrucks = response.data.filter((truck) => {
+        return truck.latitude != 0;
+      });
+      dispatch({
+        type: FETCH_TRUCKS,
+        payload: staticTrucks
+      });
+    }).catch(function(err) { console.log('fetch trucks error', err); });
+  }
 }
 
 export function filterTrucks(food) {
   const filteredTrucks = [];
   return function(dispatch) {
     axios.get(url)
-    .then(function(trucks) {
-      _.forEach(trucks.data, function(truck) {
+    .then(function(response) {
+      _.forEach(response.data, function(truck) {
         if (truck.fooditems !== undefined) {
             const item = truck.fooditems.toLowerCase();
             if (item.includes(food) === true) {
@@ -31,4 +43,18 @@ export function filterTrucks(food) {
       });
     });
   }
+}
+
+export function onHoverTruck(truck) {
+  return {
+    type: ON_HOVER_TRUCK,
+    payload: truck
+  };
+}
+
+export function onCenterChange([lat, lng]) {
+  return {
+    type: ON_CENTER_CHANGE,
+    payload: [lat, lng]
+  };
 }
