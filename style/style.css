@@ -16,7 +16,7 @@ input {
   position: fixed;
   top: 10px;
   left: 150px;
-  z-index: 50px;
+  z-index: 50;
 }
 
 .container {
