@@ -40,7 +40,8 @@ const tooltipStyle = {
   pointerEvents: 'none',
   bottom: '125%',
   color: '#FFFFFF',
-  zIndex: '5000'
+  zIndex: '5000',
+  fontFamily: 'Anton'
 };
 
 export { greatPlaceStyle, greatPlaceStyleHover, tooltipStyle, K_SIZE };

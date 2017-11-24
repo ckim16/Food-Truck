@@ -16,12 +16,13 @@ class TruckList extends Component {
       );
     }
     return this.props.trucks.map((truck) => {
+      const type = !truck.facilitytype ? 'N/A' : truck.facilitytype;
       return (
         <List
           key={truck.objectid}
           applicant={truck.applicant}
           address={truck.address}
-          facilitytype={truck.facilitytype}
+          facilitytype={type}
           onHover={() => this.props.onHoverTruck(truck.latitude)}
           onLeave={() => this.props.onHoverTruck(null)}
           click={() => this.props.onCenterChange([+truck.latitude, +truck.longitude])}
